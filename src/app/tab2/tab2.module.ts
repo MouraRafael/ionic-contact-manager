@@ -6,6 +6,7 @@ import { Tab2Page } from './tab2.page';
 
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { FirebaseService } from '../services/firebase.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
 
     Tab2PageRoutingModule
   ],
-  declarations: [Tab2Page]
+  declarations: [Tab2Page],
+  providers:[FirebaseService]
 })
 export class Tab2PageModule {}
