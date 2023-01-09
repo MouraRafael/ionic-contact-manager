@@ -40,6 +40,22 @@ export class FirebaseService {
       })
     );
   }
+  findByName(name:string):Observable<Contact[]>{
+    const contacts = this.list();
+
+    return contacts.pipe(
+      map(
+        contacts => contacts.filter(
+          contact => {
+            const fullName = contact.name.concat(" ", contact.lastname);
+            //const regex = '/^.*' + name + '.*$/';
+
+            return fullName.toLowerCase().match(name.toLowerCase())
+          }
+        )
+      )
+    )
+  }
 
   update(contact:Contact): Promise<void>{
     const document = doc(this.fireStore, 'contacts', contact?.id)

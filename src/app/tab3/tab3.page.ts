@@ -1,12 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
+import { FirebaseService } from '../services/firebase.service';
+import { Contact } from '../models/contact.model';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
+  contactList!:Contact[]
+  searchFG!:FormGroup
+  @ViewChild('searchFGD')  searchFGD!:FormGroupDirective
 
-  constructor() {}
+  constructor(
+    private teastController:ToastController,
+    private firebase:FirebaseService
+  ) {}
+
+  ngOnInit(): void {
+    this.searchFG = new FormGroup({
+      'name': new FormControl('', Validators.required)
+    })
+  }
+
+  search(contact:any){
+    this.firebase.findByName(contact.name).subscribe({
+      next:(result)=>{
+        if(!result){
+          this.presentToast(`Contact not found: ${contact.name}`)
+        }
+        console.log(result)
+        this.contactList = result as Contact[]
+      },
+      error: (err)=>{
+        console.error(err);
+        this.presentToast(`EService inavailable`)
+      }
+    });
+    this.presentToast(contact.name);
+    this.searchFG.reset()
+  }
+
+  async presentToast(msg:string){
+    const toast = await this.teastController.create({
+      message: msg,
+      duration: 1500,
+      position:'middle',
+    });
+    console.log(msg)
+    await toast.present();
+  }
+
+  ionViewDidEnter(){ this.contactList = []}
 
 }
