@@ -21,12 +21,14 @@
   <ion-accordion-group>
     <ion-accordion *ngFor="let contact of contacts |async">
       <ion-item slot="header" color="dark">
-        <ion-label>{{contact.name}} {{contact.lastname}}</ion-label>
+        <ion-label
+
+        >{{contact.name}} {{contact.lastname}}</ion-label>
       </ion-item>
       <div class="ion-padding" slot="content">
         <ion-avatar slot="start">
           <img
-
+          (click)="editContact(contact.id)"
                 alt="Silhouette of a person's head"
 
                 src="https://ionicframework.com/docs/img/demos/avatar.svg"

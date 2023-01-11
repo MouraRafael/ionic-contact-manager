@@ -23,6 +23,8 @@ export class Tab2Page {
     this.router.navigateByUrl('/tabs/register')
   }
 
-
+  editContact(id:string){
+    this.router.navigateByUrl(`/tabs/details/${id}`)
+  }
 
 }

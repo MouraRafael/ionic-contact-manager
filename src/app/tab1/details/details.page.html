@@ -1,0 +1,82 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-title> Contact Details </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-thumbnail class="user-image">
+    <img src="/assets/img/avatar.png" />
+  </ion-thumbnail>
+  <ion-row class="photo-wrapper">
+    <ion-button fill="clean">Update Photo</ion-button>
+  </ion-row>
+
+  <form
+    [formGroup]="contactFormGroup"
+    #contactFormGroupDirective="ngForm"
+    (ngSubmit)="editContact(contactFormGroup.value)"
+    *ngIf="contactFormGroup"
+  >
+    <ion-list>
+      <ion-item>
+        <ion-input
+          placeholder="Name"
+          inputmode="text"
+          clearInput="true"
+          formControlName="name"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          placeholder="Last Name"
+          inputmode="text"
+          clearInput="true"
+          formControlName="lastname"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          placeholder="Phone Number"
+          inputmode="text"
+          clearInput="true"
+          formControlName="phone"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input
+          placeholder="e-mail"
+          inputmode="email"
+          clearInput="true"
+          formControlName="email"
+          required
+        ></ion-input>
+      </ion-item>
+        <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select formControlName="category">
+          <ion-select-option value="Family">Family</ion-select-option>
+          <ion-select-option value="Friends">Friends</ion-select-option>
+          <ion-select-option value="Coworker">Coworker</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-buttons>
+        <ion-button type="submit" color="primary" [disabled]="!contactFormGroup.valid">Salvar</ion-button>
+        <ion-button type="submit" color="danger" (click)="deleteContact()">Delete Contact</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </form>
+</ion-content>
+<!--
+
+
+
+
+category
+ -->
