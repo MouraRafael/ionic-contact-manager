@@ -68,5 +68,12 @@ export class DetailsPage implements OnInit {
     this.contactFormGroupDirective.reset();
   }
 
-  deleteContact(){}
+  deleteContact(){
+    console.log(this.contact.id)
+    this.firebaseService.delete(this.contact.id)
+    .then(
+      _ => this.router.navigateByUrl('tabs/list')
+      )
+      .catch(err => console.error(err))
+  }
 }

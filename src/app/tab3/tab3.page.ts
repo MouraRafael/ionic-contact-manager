@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular
 import { ToastController } from '@ionic/angular';
 import { FirebaseService } from '../services/firebase.service';
 import { Contact } from '../models/contact.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab3',
@@ -16,7 +17,8 @@ export class Tab3Page implements OnInit {
 
   constructor(
     private teastController:ToastController,
-    private firebase:FirebaseService
+    private firebase:FirebaseService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -54,5 +56,11 @@ export class Tab3Page implements OnInit {
   }
 
   ionViewDidEnter(){ this.contactList = []}
+
+
+
+  editContact(id:string){
+    this.router.navigateByUrl(`/tabs/details/${id}`)
+  }
 
 }

@@ -66,9 +66,11 @@
       </ion-item>
     </ion-list>
     <ion-item>
-      <ion-buttons>
+      <ion-buttons slot="start">
         <ion-button type="submit" color="primary" [disabled]="!contactFormGroup.valid">Salvar</ion-button>
-        <ion-button type="submit" color="danger" (click)="deleteContact()">Delete Contact</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button color="danger" (click)="deleteContact()">Delete Contact</ion-button>
       </ion-buttons>
     </ion-item>
   </form>
