@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Contact } from '../models/contact.model';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 import { Observable } from "rxjs";
 import { Router } from '@angular/router';
 @Component({
@@ -12,7 +12,7 @@ export class Tab2Page {
   contacts!:Observable<Contact[]>;
 
   constructor(
-    private firebaseService:FirebaseService,
+    private firebaseService:FirebaseFirestoreService,
     private router: Router
   ) {
     this.contacts = this.firebaseService.list();

@@ -18,7 +18,7 @@ const DB_NAME  = 'contacts'
 @Injectable({
   providedIn: 'root',
 })
-export class FirebaseService {
+export class FirebaseFirestoreService {
   constructor(private fireStore: Firestore) {}
 
   save(contact: Contact): Promise<void> {

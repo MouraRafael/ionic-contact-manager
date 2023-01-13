@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Contact } from '../models/contact.model';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 
 @Component({
   selector: 'app-tab1',
@@ -19,7 +19,7 @@ export class Tab1Page implements OnInit {
 
 
   constructor(
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseFirestoreService
   ) {}
 
 

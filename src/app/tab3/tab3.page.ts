@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { FirebaseService } from '../services/firebase.service';
+import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
 import { Contact } from '../models/contact.model';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class Tab3Page implements OnInit {
 
   constructor(
     private teastController:ToastController,
-    private firebase:FirebaseService,
+    private firebase:FirebaseFirestoreService,
     private router:Router
   ) {}
 

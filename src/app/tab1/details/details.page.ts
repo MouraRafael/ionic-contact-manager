@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Contact } from '../../models/contact.model';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseFirestoreService } from '../../services/firebase.firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { emit } from 'process';
 
@@ -23,7 +23,7 @@ export class DetailsPage implements OnInit {
   contactFormGroupDirective!: FormGroupDirective;
 
   constructor(
-    private firebaseService: FirebaseService,
+    private firebaseService: FirebaseFirestoreService,
     private activatedRoute:ActivatedRoute,
     private router:Router
   ) {}
