@@ -44,4 +44,17 @@ export class Tab1Page implements OnInit {
     console.log(newContact)
     this.contactFormGroupDirective.reset();
   }
+
+  uploadImage(event: FileList){
+    const file = event.item(0);
+    // Validação da imagem
+
+    if(file?.type.split('/')[0] !=='image'){
+      console.error(`Tipo de arquivo inválido`)
+      return;
+    }
+
+    //animação de carregamento
+
+  }
 }
