@@ -9,7 +9,14 @@
     <img src="/assets/img/avatar.png" />
   </ion-thumbnail>
   <ion-row class="photo-wrapper">
-    <ion-button fill="clean">Add Photo</ion-button>
+    <ion-button [disabled]="this.isFileUploading" fill="clean">
+      Add Photo
+      <input type="file" (change)="uploadImage($event.target.files)">
+    </ion-button>
+    <ion-item *ngIf="percentageUpload | async as percentage">
+      Carregando: {{percentage | number}}%
+      <ion-progress-bar value="{{percentage/100}}"></ion-progress-bar>
+    </ion-item>
   </ion-row>
 
   <form

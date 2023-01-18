@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { Avatar } from '../models/avatar.model';
 import { Observable } from 'rxjs';
+
+
+const COLLECTION_NAME = "contactCollection"
+
 
 @Injectable({
   providedIn: 'root'
 })
 
-const COLLECTION_NAME = "contactCollection"
 
 export class FirebaseFirestorageService {
   private fileCollection!: AngularFirestoreCollection<Avatar>;
@@ -27,5 +30,23 @@ export class FirebaseFirestorageService {
       return this.afs.collection(collectionName);
     }
 
+    imageReference(fileStoragePath:string):AngularFireStorageReference{
+      return this.afStorage.ref(fileStoragePath);
+    }
+
+    uploadTask(fileStoragePath:string,file:File):AngularFireUploadTask{
+      return this.afStorage.upload(fileStoragePath,file);
+    }
+
+    storeFile(avatar:Avatar){
+      const fileId = this.afs.createId();
+
+      this.fileCollection
+      .doc(fileId)
+      .set(avatar)
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
+
+    }
 
 }

@@ -7,6 +7,7 @@ import { Tab1Page } from './tab1.page';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { FirebaseFirestoreService } from '../services/firebase.firestore.service';
+import { FirebaseFirestorageService } from '../services/firebase-firestorage.service';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { FirebaseFirestoreService } from '../services/firebase.firestore.service
     Tab1PageRoutingModule
   ],
   declarations: [Tab1Page],
-  providers:[FirebaseFirestoreService]
+  providers:[FirebaseFirestoreService,FirebaseFirestorageService]
 })
 export class Tab1PageModule {}
