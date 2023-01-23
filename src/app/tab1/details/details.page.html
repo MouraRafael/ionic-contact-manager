@@ -6,10 +6,10 @@
 
 <ion-content [fullscreen]="true">
   <ion-thumbnail class="user-image">
-    <img src="/assets/img/avatar.png" />
+    <img [src]="contact.imageUrl" *ngIf="contactFormGroup" />
   </ion-thumbnail>
   <ion-row class="photo-wrapper">
-    <ion-button fill="clean">Update Photo</ion-button>
+    <ion-button fill="clean" (click)="upload()">Update Photo</ion-button>
   </ion-row>
 
   <form

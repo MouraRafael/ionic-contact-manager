@@ -7,4 +7,5 @@ export class Contact{
     phone!:string;
     email!:string;
     category!:ContactCategory;
+    imageUrl!:string
 }

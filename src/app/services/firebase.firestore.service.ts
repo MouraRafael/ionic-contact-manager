@@ -6,6 +6,7 @@ import {
   setDoc,
   collectionData,
   docSnapshots,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { deleteDoc } from '@firebase/firestore';
 import { map, Observable } from 'rxjs';
@@ -65,7 +66,7 @@ export class FirebaseFirestoreService {
     const document = doc(this.fireStore, DB_NAME, contact?.id);
     const { id, ...data } = contact;
 
-    return setDoc(document, data);
+    return updateDoc(document, data);
   }
   delete(id: string): Promise<void> {
     const document = doc(this.fireStore, DB_NAME, id);

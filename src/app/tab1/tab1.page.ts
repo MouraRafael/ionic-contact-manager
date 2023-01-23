@@ -9,6 +9,9 @@ import { FirebaseFirestoreService } from '../services/firebase.firestore.service
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
+  avatar:string = '../../assets/img/avatar.png';
+
+
   contactFormGroup!:FormGroup
 
   @ViewChild('contactFormGroupDirective') contactFormGroupDirective!:FormGroupDirective
@@ -32,6 +35,10 @@ export class Tab1Page implements OnInit {
       'email': new FormControl('',[Validators.required]),
       'category': new FormControl('',[Validators.required])
     })
+
+    this.contactFormGroup.valueChanges.subscribe(()=>{
+      this.defineAvatar()
+    })
   }
 
 
@@ -40,21 +47,20 @@ export class Tab1Page implements OnInit {
   createContact(values:any){
     // pegar todos os dados do formulário e transformar em um novo contato
     let newContact:Contact = {...values}
+    newContact.imageUrl = this.avatar;
     this.firebaseService.save(newContact);
     console.log(newContact)
     this.contactFormGroupDirective.reset();
   }
 
-  uploadImage(event: FileList){
-    const file = event.item(0);
-    // Validação da imagem
+  uploadImage(){
 
-    if(file?.type.split('/')[0] !=='image'){
-      console.error(`Tipo de arquivo inválido`)
-      return;
+  }
+
+  defineAvatar(){
+    const email = this.contactFormGroup.get('email');
+    if(email?.valid){
+      this.avatar = `https://robohash.org/${email.value}?set=set3&gravatar=yes`
     }
-
-    //animação de carregamento
-
   }
 }

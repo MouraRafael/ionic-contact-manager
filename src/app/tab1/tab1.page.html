@@ -6,11 +6,9 @@
 
 <ion-content [fullscreen]="true">
   <ion-thumbnail class="user-image">
-    <img src="/assets/img/avatar.png" />
+    <img [src]="avatar" />
   </ion-thumbnail>
-  <ion-row class="photo-wrapper">
-    <ion-button fill="clean">Add Photo</ion-button>
-  </ion-row>
+
 
   <form
     [formGroup]="contactFormGroup"

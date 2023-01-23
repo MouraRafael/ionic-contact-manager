@@ -8,7 +8,10 @@ import {
 import { Contact } from '../../models/contact.model';
 import { FirebaseFirestoreService } from '../../services/firebase.firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { emit } from 'process';
+import {Camera, CameraResultType, CameraSource} from '@capacitor/camera'
+import { AlertController, LoadingController } from '@ionic/angular';
+import { FirebaseFirestorageService } from '../../services/firebase-firestorage.service';
+
 
 @Component({
   selector: 'app-details',
@@ -25,7 +28,10 @@ export class DetailsPage implements OnInit {
   constructor(
     private firebaseService: FirebaseFirestoreService,
     private activatedRoute:ActivatedRoute,
-    private router:Router
+    private router:Router,
+    private loadingControoler:LoadingController,
+    private alertController:AlertController,
+    private fireStorage:FirebaseFirestorageService
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +81,38 @@ export class DetailsPage implements OnInit {
       _ => this.router.navigateByUrl('tabs/list')
       )
       .catch(err => console.error(err))
+  }
+
+  async upload(){
+    const image = await Camera.getPhoto({
+      quality:90,
+      allowEditing:false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos
+    });
+
+    if(image){
+      const loading = await this.loadingControoler.create();
+      await loading.present();
+
+      const result = await this.fireStorage.upload(image,this.contact.id);
+      loading.dismiss();
+
+      if(result){
+        this.message('Success','Success on salving image')
+      }else{
+        this.message('Fail','Ops! There was a problem!')
+      }
+
+    }
+  }
+
+  async message(header:string,message:string){
+    const alert = await this.alertController.create({
+      header:header,
+      message:message,
+      buttons:['OK']
+    })
+    await alert.present()
   }
 }
